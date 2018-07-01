@@ -1,0 +1,56 @@
+{
+	"Up":			"CursorUp",
+	"Down":			"CursorDown",
+	"Right":		"CursorRight",
+	"Left":			"CursorLeft",
+
+	"ShiftUp":		"SelectUp",
+	"ShiftDown":	"SelectDown",
+	"ShiftLeft":	"SelectLeft",
+	"ShiftRight":	"SelectRight",
+
+	"CtrlLeft":		"WordLeft",
+	"CtrlRight":	"WordRight",
+
+	"CtrlShiftUp":		"MoveLinesUp",
+	"CtrlShiftDown":	"MoveLinesDown",
+	"CtrlShiftLeft":	"SelectToStartOfLine",
+	"CtrlShiftRight":	"SelectToEndOfLine",
+
+	"Enter":		"InsertNewline",
+	"Backspace":	"Backspace",
+	"Delete":		"Delete",
+	"Home":			"CursorStart",
+	"End":			"CursorEnd",
+	"PageUp":		"CursorPageUp",
+	"PageDown":		"CursorPageDown",
+	
+	"ShiftHome":	"SelectToStart",
+	"ShiftEnd":		"SelectToEnd",
+	"CtrlH":		"DeleteWordLeft",
+	"CtrlDelete":	"DeleteWordRight",
+
+	"Tab":			"IndentSelection,InsertTab",
+	"Backtab":		"OutdentSelection,OutdentLine",
+	"CtrlJ":		"OutdentSelection,OutdentLine",
+	"CtrlK":		"SelectRight,IndentSelection,InsertTab,CursorLeft",
+
+	"CtrlW":		"Quit",
+	"CtrlO":		"OpenFile",
+	"CtrlS":		"Save",
+	"CtrlF":		"FindNext",
+	"CtrlZ":		"Undo",
+	"CtrlY":		"Redo",
+	"CtrlShiftZ":	"Redo",
+	"CtrlC":		"Copy",
+	"CtrlX":		"Cut",
+	"CtrlV":		"Paste",
+	"CtrlD":		"DuplicateLine",
+	"CtrlA":		"SelectAll",
+
+	"CtrlN":		"AddTab",
+	"Ctrl,":		"PreviousTab",
+	"Ctrl.":		"NextTab",
+
+	"CtrlL":		"JumpLine"			
+}

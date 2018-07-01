@@ -1,0 +1,44 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+#TabsToolbar {
+	visibility: collapse !important;
+}
+
+#navigator-toolbox {
+	-moz-box-ordinal-group: 2 !important;
+}
+
+#nav-bar {
+	background-color: #151515 !important;
+}
+
+#urlbar {
+	background-color: transparent !important;
+	text-align: center !important;
+	border: none !important;
+	border-radius: none !important;
+	background-color: transparent !important;
+	font-family: "Roboto";
+}
+
+#urlbar-container, #PanelUI-button {
+	background-color: #151515 !important;
+}
+
+#PanelUI-menu-button, #urlbar {
+	color: #DADAAD !important;
+}
+
+#back-button, #forward-button, #stop-reload-button, #home-button, #search-container, .urlbar-icon, #library-button, #identity-box, #sidebar-button, .chromeclass-toolbar-additional {
+	visibility: collapse !important;
+}
+
+* {
+	border: none !important;
+	box-shadow: none !important;
+	border-radius: none !important;
+}
+
+#navigator-toolbox::after {
+	border-bottom: none !important;
+}

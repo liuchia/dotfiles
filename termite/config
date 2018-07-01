@@ -1,0 +1,51 @@
+[options]
+scroll_on_output = true
+scroll_on_keystroke = true
+audible_bell = false
+mouse_autohide = false
+allow_bold = true
+dynamic_title = false
+urgent_on_bell = false
+clickable_url = true
+font = Hack 8
+scrollback_lines = 10000
+search_wrap = false
+
+# "system", "on" or "off"
+cursor_blink = system
+
+# "block", "underline" or "ibeam"
+cursor_shape = block
+
+# Hide links that are no longer valid in url select overlay mode
+filter_unmatched_urls = true
+
+[colors]
+foreground      = #151515
+foreground_bold = #151515
+cursor          = #151515
+background      = #dadaad
+
+color0  = #ef473a
+color8  = #ef473a
+
+color1  = #cb2d3e
+color9  = #cb2d3e
+
+color2  = #870734
+color10 = #870734
+
+color3  = #751f68
+color11 = #751f68
+
+color4  = #f9684a
+color12 = #f9684a
+
+color5  = #ee9c4a
+color13 = #ee9c4a
+
+color6  = #39aa38
+color14 = #39aa38
+
+color7  = #ffd6bf
+color15 = #313131

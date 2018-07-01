@@ -1,0 +1,38 @@
+@-moz-document url("about:home"), url("about:newtab") {
+	body {
+		background-color: #DADAAD !important;
+	}
+
+	.screenshot, .rich-icon {
+		box-shadow: none !important;
+		border-radius: 50% 50% 50% 50% !important;
+		background-color: transparent !important;
+		filter: sepia(100%);
+	}
+
+	.default-icon {
+		box-shadow: none !important;
+		background-color: #151515 !important;
+		border-radius: 50% 50% 50% 50% !important;
+		filter: sepia(50%);
+	}
+
+	.tile {
+		box-shadow: none !important;
+		background-color: transparent !important;
+	}
+
+	#onboarding-overlay-button-watermark-icon, .icon {
+		fill: #151515 !important;
+	}
+
+	span {
+		color: #151515 !important;
+	}
+
+	main {
+		margin: 0 0 0 auto !important;
+		padding: 0 !important;
+	}
+}
+
