@@ -1,0 +1,43 @@
+include "/usr/share/nano/*.nanorc"
+
+set nohelp
+set nowrap
+set suspend
+set autoindent
+set mouse
+set multibuffer
+set nonewlines
+set tabsize 4
+set linenumbers
+set smooth
+set softwrap
+
+unbind ^K main
+unbind ^U main
+unbind ^W main
+unbind ^A main
+unbind ^D main
+
+bind ^O insert main 		# open file
+bind ^S writeout main 		# save file
+bind ^Q exit main			# quit
+
+bind ^J gotoline main		# jump
+bind ^L curpos main			# location
+bind ^P prevword main		# previous
+bind ^N nextword main		# next
+bind ^B firstline main		# beginning
+bind ^E lastline main		# ending
+
+bind ^Space mark main		# begin selection
+bind ^X cut main			# cut
+bind ^C copytext main		# copy
+bind ^V uncut main			# paste
+
+bind ^Z undo main			# undo
+bind ^Y redo main			# redo
+
+bind ^F whereis main		# find
+bind ^H replace main		# replace
+
+bind ^K comment main		# komment

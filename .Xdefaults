@@ -1,0 +1,34 @@
+# TERMINAL COLOURS
+*foreground:		#efe6eb
+*foreground_bold:	#efe6eb
+*cursor:			#efe6eb
+*background:		#242321
+*background_bold:	#242321
+# GRAIN
+*color0:			#ae7a65
+*color8:			#ae7a65
+# PINK
+*color1:			#c98b7c
+*color9:			#c98b7c
+# GREEN
+*color2:			#7c7852
+*color10:			#7c7852
+# ORANGE
+*color3:			#da8e6a
+*color11:			#da8e6a
+# BLUE
+*color4:			#6791a9
+*color12:			#6791a9
+# BROWN
+*color5:			#46332d
+*color13:			#46332d
+# DARK BLUE
+*color6:			#446677
+*color14:			#446677
+# PALE GREY
+*color7:			#d5c4c4
+*color15:			#d5c4c4
+
+# URXVT
+URxvt.scrollBar:	false
+URxvt.font:		xft:monospace:size=10
