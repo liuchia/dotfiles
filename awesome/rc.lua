@@ -93,8 +93,8 @@ local global_buton = awful.util.table.join(
 	awful.key({mod}, "F5", function() awesome.restart() end),
 	awful.key({alt, ctl}, "Delete", function() awesome.quit() end),
 	
-	awful.key({}, "XF86MonBrightnessUp", function() os.execute("xbacklight -inc 10") end),
-	awful.key({}, "XF86MonBrightnessDown", function() os.execute("xbacklight -dec 10") end),
+	awful.key({}, "XF86MonBrightnessUp", function() os.execute("light -A 10") end),
+	awful.key({}, "XF86MonBrightnessDown", function() os.execute("light -U 10") end),
 	awful.key({mod}, "=", function() os.execute("amixer -q sset Master 3%+") end),
 	awful.key({mod}, "-", function() os.execute("amixer -q sset Master 3%-") end),
 	awful.key({}, "XF86AudioRaiseVolume", function() os.execute("amixer -q sset Master 10%+") end),
@@ -171,7 +171,7 @@ client.connect_signal("request::titlebars", function(c)
 		end;
 		draw = function(self, context, cr, width, height)
 			cr:set_source_rgb(36/255, 35/255, 33/255)
-			cr:rectangle(0, 1, width, height/2+1)
+			cr:rectangle(0, 0, width, height/2)
 			cr:fill()
 			if client.focus == c then
 				cr:set_source_rgb(218/255, 142/255, 106/255)

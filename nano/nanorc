@@ -41,3 +41,9 @@ bind ^F whereis main		# find
 bind ^H replace main		# replace
 
 bind ^K comment main		# komment
+
+syntax "Archive" ".*\.arx$"
+color brightwhite ".+"
+color blue "^[^-]+"
+color green start="\(" end="\)"
+color red start="\[" end="\]"
