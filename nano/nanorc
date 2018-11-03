@@ -1,9 +1,9 @@
 include "/usr/share/nano/*.nanorc"
+include "~/.config/nano/haskell.nanorc"
 
 set nohelp
 set nowrap
 set suspend
-set autoindent
 set mouse
 set multibuffer
 set nonewlines
@@ -12,35 +12,71 @@ set linenumbers
 set smooth
 set softwrap
 
-unbind ^K main
-unbind ^U main
+set numbercolor green,normal
+set titlecolor green,normal
+set statuscolor green,normal
+
+unbind F2 main
+unbind F3 main
+unbind F4 main
+unbind F6 main
+unbind F9 main
+unbind F10 main
+unbind F11 main
+unbind F12 main
 unbind ^W main
-unbind ^A main
-unbind ^D main
+unbind ^R main
+unbind ^T main
+unbind ^U main
+unbind ^\ main
+unbind M-E main
+unbind M-U main
+unbind M-6 main
+unbind M-M main
+unbind M-Z main
+unbind M-O main
+unbind M-L main
+unbind M-K main
+unbind M-I main
+unbind M-H main
+unbind M-Y main
+unbind M-P main
+unbind M-# main
+unbind M-$ main
+unbind M-S main
+unbind M-C main
+unbind M-X main
 
-bind ^O insert main 		# open file
-bind ^S writeout main 		# save file
-bind ^Q exit main			# quit
+bind F1 help main				# help menu
+bind ^O insert main 			# open file
+bind ^S writeout main 			# save file
+bind ^Q exit main				# quit
 
-bind ^J gotoline main		# jump
-bind ^L curpos main			# location
-bind ^P prevword main		# previous
-bind ^N nextword main		# next
-bind ^B firstline main		# beginning
-bind ^E lastline main		# ending
+bind ^J gotoline main			# jump
+bind ^L curpos main				# location
+bind ^P prevword main			# previous
+bind ^N nextword main			# next
+bind ^B firstline main			# beginning
+bind ^E lastline main			# ending
 
-bind ^Space mark main		# begin selection
-bind ^X cut main			# cut
-bind ^C copytext main		# copy
-bind ^V uncut main			# paste
+bind M-A mark main				# begin selection
+bind ^Space mark main			# begin selection alias
+bind ^A "a" main			# select all
+bind ^X cut main				# cut
+bind ^C copytext main			# copy
+bind ^V uncut main				# paste
+bind ^D "[D[7~" main	# duplicate -> left -> home
 
-bind ^Z undo main			# undo
-bind ^Y redo main			# redo
+bind ^Z undo main				# undo
+bind ^Y redo main				# redo
 
-bind ^F whereis main		# find
-bind ^H replace main		# replace
+bind ^F whereis main			# find
+bind ^H replace main			# replace
 
-bind ^K comment main		# komment
+bind ^K comment main			# komment
+
+bind M-1 recordmacro main		# record a macro
+bind M-2 runmacro main			# run a macro
 
 syntax "Archive" ".*\.arx$"
 color brightwhite ".+"
