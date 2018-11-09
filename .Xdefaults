@@ -2,8 +2,8 @@
 *foreground:		#efe6eb
 *foreground_bold:	#efe6eb
 *cursor:			#efe6eb
-*background:		#242321
-*background_bold:	#242321
+*background:		#141311
+*background_bold:	#141311
 # GRAIN
 *color0:			#ae7a65
 *color8:			#ae7a65
@@ -31,4 +31,5 @@
 
 # URXVT
 URxvt.scrollBar:	false
-URxvt.font:		xft:monospace:size=10
+URxvt.font:			xft:monospace:size=10
+URxvt.saveLines:	9999
