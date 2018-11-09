@@ -4,7 +4,7 @@ theme.wallpaper = path.."Background.png"
 theme.font = "/usr/share/fonts/TTF/iosevka-regular.ttf"
 
 local white = "#efe6eb"
-local black = "#242321"
+local black = "#141311"
 local orange = "#da8e6a"
 
 theme.fg_normal 	= white

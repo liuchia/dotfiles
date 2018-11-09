@@ -8,7 +8,7 @@
 }
 
 /* Hide toolbar buttons */
-.toolbarbutton-1 {
+.toolbarbutton-1:not(#PanelUI-menu-button), #page-action-buttons {
 	display: none !important;
 }
 

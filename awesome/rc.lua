@@ -170,7 +170,7 @@ client.connect_signal("request::titlebars", function(c)
 			return width, height;
 		end;
 		draw = function(self, context, cr, width, height)
-			cr:set_source_rgb(36/255, 35/255, 33/255)
+			cr:set_source_rgb(20/255, 19/255, 17/255)
 			cr:rectangle(0, 0, width, height/2)
 			cr:fill()
 			if client.focus == c then
