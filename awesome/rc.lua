@@ -36,6 +36,12 @@ local alt = "Mod1"
 local ctl = "Control"
 local trm = "urxvt"
 
+function setwallpaper(s)
+	gears.wallpaper.maximized(beautiful.wallpaper, s, true)
+end
+
+screen.connect_signal("property::geometry", setwallpaper)
+
 local tag_order = {"Tiler Mk01", "Tiler Mk02", "Floater"}
 local tag_props = {
 	[tag_order[1]] = {
@@ -56,6 +62,9 @@ local tag_props = {
 }
 
 awful.screen.connect_for_each_screen(function(s)
+	setwallpaper(s)
+	s.prompt = awful.widget.prompt()
+
 	for i = 1, #tag_order do
 		local v = tag_order[i]
 		local tag = awful.tag.add(v, tag_props[v])
@@ -69,7 +78,7 @@ end)
 local client_keys = awful.util.table.join(
 	awful.key({mod}, "q", function(c) c:kill() end),
 	awful.key({alt}, "Tab", function()
-		awful.client.focus.byidx(-1)
+		awful.client.focus.byidx(1)
 		if client.focus then
 			client.focus:raise()
 		end
@@ -85,6 +94,8 @@ local client_buton = awful.util.table.join(
 )
 
 local global_buton = awful.util.table.join(
+	awful.key({mod}, "r", function() awful.screen.focused().prompt:run() end),
+
 	awful.key({mod}, "Left", function() awful.tag.viewprev() end),
 	awful.key({mod}, "Right", function() awful.tag.viewnext() end),
 	awful.key({mod}, "Tab", function() awful.tag.viewnext() end),
@@ -105,7 +116,7 @@ local global_buton = awful.util.table.join(
 for i = 1, #tag_order do
 	global_buton = awful.util.table.join(global_buton,
 		awful.key({mod}, "#"..(i+9), function()
-			local tag = mouse.screen.tags[i]
+			local tag = awful.screen.focused().tags[i]
 			if tag then
 				tag:view_only()
 			end
@@ -126,6 +137,8 @@ awful.rules.rules = {
 			buttons = client_buton;
 			maximized = false;
 			size_hints_honor = false;
+			placement = awful.placement.no_overlap + awful.placement.no_offscreen;
+			screen = awful.screen.focused();
 		}
 	},
 
@@ -136,10 +149,6 @@ awful.rules.rules = {
 		}
 	}
 }
-
-awful.screen.connect_for_each_screen(function(s)
-	gears.wallpaper.maximized(beautiful.wallpaper, s, true)
-end)
 
 client.connect_signal("focus", function(c)
 	c.border_color = beautiful.border_focus
