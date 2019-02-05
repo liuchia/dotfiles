@@ -4,12 +4,12 @@
 *cursor:			#efe6eb
 *background:		#141311
 *background_bold:	#141311
-# GRAIN
-*color0:			#ae7a65
-*color8:			#ae7a65
+# BROWN
+*color0:			#46332d
+*color8:			#46332d
 # PINK
-*color1:			#c98b7c
-*color9:			#c98b7c
+*color1:			#e96b5c
+*color9:			#e96b5c
 # GREEN
 *color2:			#7c7852
 *color10:			#7c7852
@@ -19,9 +19,9 @@
 # BLUE
 *color4:			#6791a9
 *color12:			#6791a9
-# BROWN
-*color5:			#46332d
-*color13:			#46332d
+# GRAIN
+*color5:			#ae7a65
+*color13:			#ae7a65
 # DARK BLUE
 *color6:			#446677
 *color14:			#446677

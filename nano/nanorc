@@ -82,5 +82,6 @@ bind M-2 runmacro main			# run a macro
 syntax "Archive" ".*\.arx$"
 color brightwhite ".+"
 color blue "^[^-]+"
-color green start="\(" end="\)"
-color red start="\[" end="\]"
+color red start="\(" end="\)"
+color green start="\[" end="\]"
+color yellow "^[0-9]*"
