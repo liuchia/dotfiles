@@ -37,7 +37,7 @@ local ctl = "Control"
 local trm = "urxvt"
 
 function setwallpaper(s)
-	gears.wallpaper.maximized(beautiful.wallpaper, s, true)
+	gears.wallpaper.set("#141311")
 end
 
 screen.connect_signal("property::geometry", setwallpaper)
@@ -171,7 +171,7 @@ end);
 
 client.connect_signal("request::titlebars", function(c)
 	awful.titlebar(c, {
-		size = 14;
+		size = 10;
 		bg_focus = "#00000000";--beautiful.titlebar_fg;
 		bg_normal = "#00000000";--beautiful.titlebar_bg;
 	}):setup {
@@ -191,3 +191,35 @@ client.connect_signal("request::titlebars", function(c)
 		layout = wibox.widget.base.make_widget
 	}
 end)
+
+do
+	local kb = {"1234567890", "qwertyuiop", "asdfghjkl", "zxcvbnm"}
+	local gapx = {0, 0, 25, 50}
+	local gapy = {0, 53, 103, 153}
+	local test = awful.wibar {
+		position = "bottom";
+		height = 200;
+		bg = "#00000000";
+	}
+	test:setup {
+	    draw   = function(self, context, cr, w, h)
+			cr:set_source_rgb(218/255, 142/255, 106/255)
+			cr:set_font_size(25)
+			for i = 1, #kb do
+				local num_keys = kb[i]:len()
+				for j = 1, num_keys do
+					local cx, cy = -25 + 54*j + gapx[i], 25 + gapy[i]
+			        cr:arc(cx, cy, 20, 0, math.pi*2)
+					local letter = kb[i]:sub(j, j)
+					local ext = cr:text_extents(letter)
+					cr:move_to(cx-ext.x_bearing-ext.width/2, cy+7)
+					cr:show_text(letter)
+			        cr:stroke()
+				end
+			end
+	    end,
+	    layout = wibox.widget.base.make_widget,
+	}
+
+
+end
