@@ -193,28 +193,49 @@ client.connect_signal("request::titlebars", function(c)
 end)
 
 do
+	local bheight = 7
+	local brad = 40
+	local grad = 45
+	local ggap = grad * 2
+	local fontsize = 16
+
 	local kb = {"1234567890", "qwertyuiop", "asdfghjkl", "zxcvbnm"}
-	local gapx = {0, 0, 25, 50}
-	local gapy = {0, 53, 103, 153}
+	local gapx = {0, 0, grad, grad*2}
+	local gapy = {0, 3+ggap, 3+ggap*2, 3+ggap*3}
 	local test = awful.wibar {
 		position = "bottom";
-		height = 200;
+		height = 400;
 		bg = "#00000000";
 	}
+
 	test:setup {
 	    draw   = function(self, context, cr, w, h)
+			cr:set_line_width(1)
 			cr:set_source_rgb(218/255, 142/255, 106/255)
-			cr:set_font_size(25)
+			cr:set_font_size(fontsize)
 			for i = 1, #kb do
 				local num_keys = kb[i]:len()
 				for j = 1, num_keys do
-					local cx, cy = -25 + 54*j + gapx[i], 25 + gapy[i]
-			        cr:arc(cx, cy, 20, 0, math.pi*2)
+					local cx, cy = -grad + ggap*j + gapx[i], grad + gapy[i]
+			        cr:arc(cx, cy, brad, 0, math.pi*2)
+			        cr:stroke()
+
+					cr:move_to(cx+brad, cy)
+					cr:line_to(cx+brad, cy+bheight)
+			        cr:stroke()
+
+					cr:move_to(cx-brad, cy)
+					cr:line_to(cx-brad, cy+bheight)
+			        cr:stroke()
+
+			        cr:arc(cx, cy+bheight, brad, 0, math.pi)
+			        cr:stroke()
+
 					local letter = kb[i]:sub(j, j)
 					local ext = cr:text_extents(letter)
-					cr:move_to(cx-ext.x_bearing-ext.width/2, cy+7)
+					cr:move_to(cx-ext.x_bearing-ext.width/2, cy+fontsize/4)
 					cr:show_text(letter)
-			        cr:stroke()
+					cr:stroke()
 				end
 			end
 	    end,
