@@ -2,17 +2,12 @@
 collection of config files for my current setup.
 
 * Window Manager : awesome
-* Shell : fish
-* Distro : Arch
 * Editor : nano
-* Terminal Emulator : urxvt
-* File Manager : ranger
-* Browser : firefox
+* Terminal Emulator : kitty
+* Browser : qutebrowser
 
 # Gallery
 
-![clean](https://i.imgur.com/Tn1lK7f.png)
+![home](https://raw.githubusercontent.com/liuchia/Ricing-Dotfiles-etc.../master/Media/Clean.png)
 
-![dirty](https://i.imgur.com/bpFhTk6.png)
-
-![firefox](https://i.imgur.com/l9rZE8s.png)
+![dirty](https://raw.githubusercontent.com/liuchia/Ricing-Dotfiles-etc.../master/Media/Busy.png)
