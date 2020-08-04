@@ -1,10 +1,8 @@
 include "/usr/share/nano/*.nanorc"
-include "~/.config/nano/haskell.nanorc"
 
 set afterends
 set nohelp
 set nowrap
-set suspend
 set multibuffer
 set nonewlines
 set tabsize 4
@@ -47,6 +45,9 @@ bind ^Z undo all
 bind ^Y redo all
 bind F5 refresh all
 bind M-X flipexecute all
+bind M-S anchor all
+bind M-A prevanchor all
+bind M-D nextanchor all
 bind ^A "m" all
 bind ^D "[A" all
 bind ^R "x" all
@@ -57,9 +58,3 @@ color blue "^[^-]+"
 color red start="\(" end="\)"
 color green start="\[" end="\]"
 color yellow "^[0-9]*"
-
-syntax "Note" ".*\.note$"
-color brightwhite ".+"
-color blue "^[^::]+"
-color red start="\[" end="\]"
-color green start="`" end="`"
