@@ -1,4 +1,4 @@
-# Ricing, Dotfiles, etc...
+# dotfiles
 collection of config files for my current setup.
 
 * Window Manager : awesome
