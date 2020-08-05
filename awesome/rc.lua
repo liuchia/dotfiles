@@ -55,6 +55,130 @@ screen.connect_signal("property::geometry", wallpaper)
 awful.screen.connect_for_each_screen(wallpaper)
 
 -- TAGS, BARS
+local function updateWidgets(s)
+	s.clock:setup {
+		draw = function(self, context, cairo, w, h)
+			if s.tags[1].selected then
+				local offset = beautiful.titlesize / 2
+				cairo:set_source(gears.color(xresources.foreground))
+				cairo:rectangle(0, 0, w, beautiful.titlesize)
+				cairo:fill()
+
+				cairo:set_source(gears.color(xresources.background))
+				cairo:rectangle(0, beautiful.titlesize, w, h - beautiful.titlesize)
+				cairo:fill()
+
+				cairo:set_line_width(1)
+				for i = 1, 60 do
+					local iangle = math.rad(6 * i)
+					cairo:set_source(gears.color(xresources.foreground))
+					local cosi = math.sin(iangle)
+					local sini = math.cos(iangle)
+					local dist1 = 80 / math.max(math.abs(cosi), math.abs(sini))
+					local dist2 = (i%5 == 0 and 75 or 79) / math.max(math.abs(cosi), math.abs(sini))
+					cairo:move_to(w/2 + math.sin(iangle)*dist1, offset + h/2 - math.cos(iangle)*dist1)
+					cairo:line_to(w/2 + math.sin(iangle)*dist2, offset + h/2 - math.cos(iangle)*dist2)
+					cairo:stroke()
+				end
+
+				local hour = tonumber(os.date("%H"))
+				local minute = tonumber(os.date("%M"))
+				local hangle = math.rad(30 * hour)
+				local hsize = 50
+				local msize = 90
+				local mangle = math.rad(6 * minute)
+				cairo:set_line_width(5)
+				cairo:set_source(gears.color(xresources.foreground))
+				cairo:move_to(w/2 + math.sin(mangle)*msize, offset + h/2 - math.cos(mangle)*msize)
+				cairo:line_to(w/2, offset + h/2)
+				cairo:stroke()
+				cairo:set_source(gears.color(xresources.color1))
+				cairo:move_to(w/2 + math.sin(hangle)*hsize, offset + h/2 - math.cos(hangle)*hsize)
+				cairo:line_to(w/2, offset + h/2)
+				cairo:stroke()
+			end
+		end;
+
+		layout = wibox.widget.base.make_widget;
+	}
+
+	awful.spawn.easy_async_with_shell(
+		"amixer sget Master | ruby -e 'puts STDIN.to_a.last.split(?[)[1].to_i'",
+		function(out)
+			local volume = tonumber(out)
+			s.volume:setup {
+				draw = function(self, context, cairo, w, h)
+					if s.tags[1].selected then
+						local offset = beautiful.titlesize / 2
+						cairo:set_source(gears.color(xresources.foreground))
+						cairo:rectangle(0, 0, w, beautiful.titlesize)
+						cairo:fill()
+
+						cairo:set_source(gears.color(xresources.background))
+						cairo:rectangle(0, beautiful.titlesize, w, h - beautiful.titlesize)
+						cairo:fill()
+
+						local cx, cy = w/2, h/2 + offset/2
+						local left = 85
+						local speakw, speakh = 5, 10
+						local jut = 10
+						local gap = 5
+						local barh = 2
+						local barw = left*2 - speakw - jut - gap
+						local notchw, notchh = 5, 20
+
+						-- speaker icon
+						cairo:set_source(gears.color(xresources.foreground))
+						cairo:move_to(cx - left, cy - speakh/2)
+						cairo:rel_line_to(speakw, 0)
+						cairo:rel_line_to(jut, -jut)
+						cairo:rel_line_to(0, jut*2 + speakh)
+						cairo:rel_line_to(-jut, -jut)
+						cairo:rel_line_to(-speakw, 0)
+						cairo:fill()
+
+						-- bar
+						cairo:set_source(gears.color(xresources.color4))
+						cairo:move_to(cx - left + gap + speakw + jut, cy - barh/2)
+						cairo:rel_line_to(barw, 0)
+						cairo:rel_line_to(0, barh)
+						cairo:rel_line_to(-barw, 0)
+						cairo:fill()
+
+						-- indicators
+						local n = 20
+						local ih = 5
+						local dist = (barw - notchw) / n
+						cairo:move_to(cx-left+gap+speakw+jut+notchw/2-dist, cy+10)
+						cairo:set_line_width(1)
+						cairo:set_source(gears.color(xresources.foreground))
+						for i = 0, n do
+							local iih = i % 5 == 0 and ih or 1
+							cairo:rel_move_to(dist, 0)
+							cairo:rel_line_to(0, -iih)
+							cairo:rel_move_to(0, iih)
+						end
+						cairo:stroke()
+
+						-- notch position
+						local x = (barw - notchw) * volume / 100
+						cairo:set_source(gears.color(xresources.foreground))
+						cairo:move_to(cx - left + gap + speakw + jut, cy - notchh/2)
+						cairo:rel_move_to(x, 0)
+						cairo:rel_line_to(notchw, 0)
+						cairo:rel_line_to(0, notchh)
+						cairo:rel_line_to(-notchw, 0)
+						cairo:fill()
+					end
+				end;
+
+				layout = wibox.widget.base.make_widget;
+			}
+		end
+	)
+end
+
+
 awful.screen.connect_for_each_screen(function(s)
 	local suit = awful.layout.suit
 	for i = 1, 5 do
@@ -78,64 +202,27 @@ awful.screen.connect_for_each_screen(function(s)
 	s.clock = wibox {
 		bg = "#00000000";
 		screen = s;
-		x = 500;
-		y = 500;
+		x = 150;
+		y = 50;
 		width = 200;
 		height = 200 + beautiful.titlesize;
 		visible = true;
 		widget = wibox.container.background;
 	}
 
-	local function updateWidgets()
-		s.clock:setup {
-			draw = function(self, context, cairo, w, h)
-				if s.tags[1].selected then
-					local offset = beautiful.titlesize / 2
-					cairo:set_source(gears.color(xresources.foreground))
-					cairo:rectangle(0, 0, w, beautiful.titlesize)
-					cairo:fill()
-
-					cairo:set_source(gears.color(xresources.background))
-					cairo:rectangle(0, beautiful.titlesize, w, h - beautiful.titlesize)
-					cairo:fill()
-
-					cairo:set_line_width(1)
-					for i = 1, 60 do
-						local iangle = math.rad(6 * i)
-						cairo:set_source(gears.color(xresources.foreground))
-						local cosi = math.sin(iangle)
-						local sini = math.cos(iangle)
-						local dist1 = 80 / math.max(math.abs(cosi), math.abs(sini))
-						local dist2 = (i%5 == 0 and 75 or 79) / math.max(math.abs(cosi), math.abs(sini))
-						cairo:move_to(w/2 + math.sin(iangle)*dist1, offset + h/2 - math.cos(iangle)*dist1)
-						cairo:line_to(w/2 + math.sin(iangle)*dist2, offset + h/2 - math.cos(iangle)*dist2)
-						cairo:stroke()
-					end
-
-					local hour = tonumber(os.date("%H"))
-					local minute = tonumber(os.date("%M"))
-					local hangle = math.rad(30 * hour)
-					local hsize = 50
-					local msize = 90
-					local mangle = math.rad(6 * minute)
-					cairo:set_line_width(5)
-					cairo:set_source(gears.color(xresources.foreground))
-					cairo:move_to(w/2 + math.sin(mangle)*msize, offset + h/2 - math.cos(mangle)*msize)
-					cairo:line_to(w/2, offset + h/2)
-					cairo:stroke()
-					cairo:set_source(gears.color(xresources.color1))
-					cairo:move_to(w/2 + math.sin(hangle)*hsize, offset + h/2 - math.cos(hangle)*hsize)
-					cairo:line_to(w/2, offset + h/2)
-					cairo:stroke()
-				end
-			end;
-
-			layout = wibox.widget.base.make_widget;
-		}
-	end
+	s.volume = wibox {
+		bg = "#00000000";
+		screen = s;
+		x = 150;
+		y = 290;
+		width = 200;
+		height = 80 + beautiful.titlesize;
+		visible = true;
+		widget = wibox.container.background;
+	}
 
 	s:connect_signal("tag::history::update", function()
-		updateWidgets()
+		updateWidgets(s)
 		s.bar:setup {
 			draw = function(self, context, cairo, w, h)
 				local cx = w/2
@@ -165,7 +252,7 @@ awful.screen.connect_for_each_screen(function(s)
 		call_now = true;
 		autostart = true;
 		callback = function()
-			updateWidgets()
+			awful.screen.connect_for_each_screen(updateWidgets)
 		end
 	}
 end)
@@ -190,6 +277,14 @@ local keys = awful.util.table.join(
 	end),
 	awful.key({"Mod4"}, "i", function()
 		awful.spawn("sudo xbacklight -dec 10")
+	end),
+	awful.key({"Mod4"}, "o", function()
+		awful.spawn("amixer sset Master 5%-")
+		awful.screen.connect_for_each_screen(updateWidgets)
+	end),
+	awful.key({"Mod4"}, "p", function()
+		awful.spawn("amixer sset Master 5%+")
+		awful.screen.connect_for_each_screen(updateWidgets)
 	end)
 )
 
