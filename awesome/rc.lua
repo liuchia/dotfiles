@@ -16,7 +16,8 @@ local xresources = beautiful.xresources.get_current_theme()
 beautiful.init {
 	gap = 15;
 	titlesize = 15;
-	wallpaper = folder .. "/Images/PositronDreamFinespun.png";
+	-- Herman Gustav af Sillen - Swedish Frigates off Gibraltar
+	wallpaper = folder .. "/Images/sillen.png";
 	master_width_factor = 0.61;
 	border_width = 0;
 }
@@ -236,7 +237,7 @@ awful.screen.connect_for_each_screen(function(s)
 					local t = s.tags[i]
 					local pr = r * (t.selected and 1 or 0.39)
 					local pd = pr + pr
-					cairo:set_source(gears.color(t.selected and xresources.color2 or xresources.foreground))
+					cairo:set_source(gears.color(t.selected and xresources.color1 or xresources.foreground))
 					cairo:rectangle(px-pr, cy-pr, pd, pd)
 					cairo:fill()
 					px = px + d + g
@@ -367,7 +368,7 @@ client.connect_signal("request::titlebars", function(c)
 		end;
 
 		draw = function(self, context, cairo, w, h)
-			cairo:set_source(gears.color(client.focus == c and xresources.color2 or xresources.foreground))
+			cairo:set_source(gears.color(client.focus == c and xresources.color1 or xresources.foreground))
 			cairo:rectangle(0, 0, w, h)
 			cairo:fill()
 		end;
