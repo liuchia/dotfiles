@@ -58,3 +58,5 @@ color blue "^[^-]+"
 color red start="\(" end="\)"
 color green start="\[" end="\]"
 color yellow "^[0-9]*"
+
+extendsyntax lua color ,green "[[:space:]]+$"

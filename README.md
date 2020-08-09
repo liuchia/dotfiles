@@ -6,7 +6,13 @@ collection of config files for my current setup.
 * Terminal Emulator : kitty
 * Browser : qutebrowser
 
-# Gallery
+# need to install
+
+* ruby
+* amixer
+* xbacklight
+
+# gallery
 
 ![home](https://raw.githubusercontent.com/liuchia/Ricing-Dotfiles-etc.../master/Media/Clean.png)
 
