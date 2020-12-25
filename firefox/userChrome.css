@@ -1,0 +1,83 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+* {
+	box-shadow: none !important;
+	border: none !important;
+	border-radius: 0 !important;
+	/* color around urlbar */
+	--toolbar-bgcolor: #F05 !important;
+}
+
+/* background of tab bar color */
+.browser-toolbar.titlebar-color {
+	background-color: #000 !important;
+	color: #FFF !important;
+}
+
+/* one bar */
+.titlebar-placeholder:not([type="pre-tabs"]) {
+	display: none !important;
+}
+
+/* no close buttons on tabs */
+.tab-close-button {
+	display: none !important;
+}
+
+/* no text on tabs */
+.tab-label-container {
+	display: none !important;
+}
+
+/* make tab width really small */
+.tabbrowser-tab {
+	-moz-box-flex: 0 !important;
+	width: auto !important;
+	min-width: 0 !important;
+}
+
+/* no weird glowy box shadow on tab sound icon */
+.tab-icon-sound {
+	filter: none !important;
+}
+
+/* white blur + make favicons more contrasty */
+.tab-icon-image {
+	filter: contrast(150%) drop-shadow(0px 0px 4px #FFF)
+}
+
+/* display globe icon for no favicon */
+.tab-icon-image:not([src]) {
+	display: initial !important;
+}
+
+/* remove tab coloring */
+.tab-background {
+	background: none !important;
+}
+
+/* no tab separators */
+.tabbrowser-tab::after {
+	border: none !important;
+}
+
+/* remove line over tabs */
+.tab-line {
+	display: none !important;
+}
+
+/* selected tab color */
+.tabbrowser-tab[visuallyselected="true"] {
+    background-color: #F05 !important;
+}
+
+/* slide nav bar under titlebar when not in focus */
+#navigator-toolbox:not(:focus-within):not(:hover) > #nav-bar { margin-top: -29px; }
+#navigator-toolbox:hover:not(:focus-within) > #nav-bar{ margin-top: -29px; }
+#navigator-toolbox > #nav-bar { transition: 0.2s margin-top ease-out; } 
+#nav-bar {z-index: 1;}
+#titlebar {
+	position: fixed;
+	z-index: 2;
+}
+
