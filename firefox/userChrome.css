@@ -25,14 +25,14 @@
 }
 
 /* no text on tabs */
-.tab-label-container {
+/*.tab-label-container {
 	display: none !important;
-}
+}*/
 
 /* make tab width really small */
 .tabbrowser-tab {
 	-moz-box-flex: 0 !important;
-	width: auto !important;
+	width: 100px !important;
 	min-width: 0 !important;
 }
 
@@ -72,12 +72,11 @@
 }
 
 /* slide nav bar under titlebar when not in focus */
-#navigator-toolbox:not(:focus-within):not(:hover) > #nav-bar { margin-top: -29px; }
-#navigator-toolbox:hover:not(:focus-within) > #nav-bar{ margin-top: -29px; }
+#navigator-toolbox:not(:focus-within):not(:hover) > #nav-bar { margin-top: -31px; }
+#navigator-toolbox:hover:not(:focus-within) > #nav-bar{ margin-top: -31px; }
 #navigator-toolbox > #nav-bar { transition: 0.2s margin-top ease-out; } 
 #nav-bar {z-index: 1;}
 #titlebar {
 	position: fixed;
 	z-index: 2;
 }
-
