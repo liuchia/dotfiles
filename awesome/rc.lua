@@ -45,7 +45,7 @@ end
 
 -- WALLPAPER
 function wallpaper(s)
-	gears.wallpaper.set("#f2f0ec")
+	gears.wallpaper.set(xresources.color7)
 end
 
 screen.connect_signal("property::geometry", wallpaper)
@@ -201,20 +201,28 @@ local function updateBackdrop()
 	cr:set_source_rgba(0, 0, 0, 0)
 	cr:paint()
 
-	local top = true
 	local activeScreen = awful.screen.focused()
 	for _, seenClient in pairs(activeScreen.clients) do
 		local cg = seenClient:geometry()
 		if client.focus == seenClient then
 			cr:set_source(gears.color(xresources.color6))
-			top = false
+			cr:rectangle(cg.x-2, cg.y-2, cg.width+4, 2)
+			cr:rectangle(cg.x-2, cg.y+cg.height, cg.width+4, 2)
+			cr:rectangle(cg.x-2, cg.y, 2, cg.height)
+			cr:rectangle(cg.x+cg.width, cg.y, 2, cg.height)
+			cr:fill()
 		else
 			cr:set_source(gears.color(xresources.foreground))
+			cr:rectangle(cg.x-1, cg.y-1, cg.width+2, 1)
+			cr:rectangle(cg.x-1, cg.y+cg.height, cg.width+2, 1)
+			cr:rectangle(cg.x-1, cg.y, 1, cg.height)
+			cr:rectangle(cg.x+cg.width, cg.y, 1, cg.height)
+			cr:fill()
 		end
-		cr:rectangle(cg.x-1, cg.y-1, cg.width+2, 1)
-		cr:rectangle(cg.x-1, cg.y+cg.height, cg.width+2, 1)
-		cr:rectangle(cg.x-1, cg.y, 1, cg.height)
-		cr:rectangle(cg.x+cg.width, cg.y, 1, cg.height)
+
+		cr:set_source(gears.color(xresources.foreground))
+		cr:rectangle(cg.x+2, cg.y+cg.height+1, cg.width+2, 3)
+		cr:rectangle(cg.x+cg.width+1, cg.y+3, 3, cg.height)
 		cr:fill()
 	end
 
