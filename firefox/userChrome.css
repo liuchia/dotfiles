@@ -5,13 +5,12 @@
 	border: none !important;
 	border-radius: 0 !important;
 	/* color around urlbar */
-	--toolbar-bgcolor: #F05 !important;
+	--toolbar-bgcolor: #66CCCC !important;
 }
 
 /* background of tab bar color */
-.browser-toolbar.titlebar-color {
-	background-color: #000 !important;
-	color: #FFF !important;
+#tabbrowser-tabs {
+	background-color: #F2F0EC !important;
 }
 
 /* one bar */
@@ -51,11 +50,6 @@
 	display: initial !important;
 }
 
-/* remove tab coloring */
-.tab-background {
-	background: none !important;
-}
-
 /* no tab separators */
 .tabbrowser-tab::after {
 	border: none !important;
@@ -68,14 +62,27 @@
 
 /* selected tab color */
 .tabbrowser-tab[visuallyselected="true"] {
-    background-color: #F05 !important;
+  background-color: #66CCCC !important;
+	color: #F2F0EC !important;
+}
+
+.tab-background {
+	background-image: none !important;;
+}
+
+:root {
+	--tab-block-margin: 0px !important;
 }
 
 /* slide nav bar under titlebar when not in focus */
-#navigator-toolbox:not(:focus-within):not(:hover) > #nav-bar { margin-top: -31px; }
-#navigator-toolbox:hover:not(:focus-within) > #nav-bar{ margin-top: -31px; }
+#navigator-toolbox:not(:focus-within):not(:hover) > #nav-bar { margin-top: -36px; }
+#navigator-toolbox:hover:not(:focus-within) > #nav-bar{ margin-top: -36px; }
 #navigator-toolbox > #nav-bar { transition: 0.2s margin-top ease-out; } 
-#nav-bar {z-index: 1;}
+#nav-bar {
+	z-index: 1;
+	background-color: #F2F0EC !important;
+	background-image: none !important;
+}
 #titlebar {
 	position: fixed;
 	z-index: 2;

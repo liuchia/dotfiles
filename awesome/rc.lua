@@ -7,7 +7,7 @@ require("awful.autofocus")
 
 local folder = os.getenv("HOME").."/.config/awesome"
 local term = "kitty -1"
-local browser = "qutebrowser"
+local browser = "firefox"
 local editor = os.getenv("EDITOR") or "nano"
 
 -- THEME
