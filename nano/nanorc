@@ -27,7 +27,7 @@ bind ^V paste all
 bind ^Space mark all
 bind M-M mark all
 bind ^H chopwordleft all
-bind ^L curpos all
+bind ^L location all
 bind ^K comment all
 bind ^T complete all
 bind ^B firstline all

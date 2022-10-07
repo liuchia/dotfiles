@@ -81,7 +81,7 @@ awful.screen.connect_for_each_screen(function(s)
 					local t = s.tags[i]
 					if not t.selected then
 						cairo:set_source(gears.color(xresources.foreground))
-						cairo:rectangle(px, 2, 40, 2)
+						cairo:rectangle(px, 4, 40, 2)
 						cairo:fill()
 					else
 						cairo:set_source(gears.color(xresources.foreground))
@@ -220,10 +220,10 @@ local function updateBackdrop()
 
 		if client.focus == seenClient then
 			cr:set_source(gears.color(xresources.color6))
-			cr:rectangle(cg.x-2, cg.y-2, cg.width+4, 1)
-			cr:rectangle(cg.x-2, cg.y+cg.height+1, cg.width+4, 1)
-			cr:rectangle(cg.x-2, cg.y-1, 1, cg.height+2)
-			cr:rectangle(cg.x+cg.width+1, cg.y-1, 1, cg.height+2)
+			cr:rectangle(cg.x-2, cg.y-2, cg.width+4, 2)
+			cr:rectangle(cg.x-2, cg.y+cg.height, cg.width+4, 2)
+			cr:rectangle(cg.x-2, cg.y, 2, cg.height+2)
+			cr:rectangle(cg.x+cg.width, cg.y, 2, cg.height+2)
 			cr:fill()
 		end
 	end

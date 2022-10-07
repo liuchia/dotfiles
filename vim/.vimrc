@@ -1,0 +1,4 @@
+set nu
+set expandtab
+set tabstop=4
+syntax on
