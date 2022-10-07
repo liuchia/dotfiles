@@ -2,12 +2,10 @@ include "/usr/share/nano/*.nanorc"
 
 set afterends
 set nohelp
-set nowrap
 set multibuffer
 set nonewlines
 set tabsize 4
 set linenumbers
-set smooth
 set softwrap
 
 set numbercolor green,normal
