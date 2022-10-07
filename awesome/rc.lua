@@ -76,19 +76,22 @@ awful.screen.connect_for_each_screen(function(s)
 		s.bar:setup {
 			draw = function(self, context, cairo, w, h)
 				local cx = w/2
-				local px = cx-50
+				local px = cx-100
 				for i = 1, 5 do
 					local t = s.tags[i]
 					if not t.selected then
 						cairo:set_source(gears.color(xresources.foreground))
-						cairo:rectangle(px, 2, 20, 1)
+						cairo:rectangle(px, 2, 40, 2)
 						cairo:fill()
 					else
+						cairo:set_source(gears.color(xresources.foreground))
+						cairo:rectangle(px-1, 0, 42, 6)
+						cairo:fill()
 						cairo:set_source(gears.color(xresources.color6))
-						cairo:rectangle(px, 0, 20, 5)
+						cairo:rectangle(px, 1, 40, 4)
 						cairo:fill()
 					end
-					px = px + 20
+					px = px + 40
 				end
 			end;
 
@@ -204,26 +207,25 @@ local function updateBackdrop()
 	local activeScreen = awful.screen.focused()
 	for _, seenClient in pairs(activeScreen.clients) do
 		local cg = seenClient:geometry()
-		if client.focus == seenClient then
-			cr:set_source(gears.color(xresources.color6))
-			cr:rectangle(cg.x-2, cg.y-2, cg.width+4, 2)
-			cr:rectangle(cg.x-2, cg.y+cg.height, cg.width+4, 2)
-			cr:rectangle(cg.x-2, cg.y, 2, cg.height)
-			cr:rectangle(cg.x+cg.width, cg.y, 2, cg.height)
-			cr:fill()
-		else
-			cr:set_source(gears.color(xresources.foreground))
-			cr:rectangle(cg.x-1, cg.y-1, cg.width+2, 1)
-			cr:rectangle(cg.x-1, cg.y+cg.height, cg.width+2, 1)
-			cr:rectangle(cg.x-1, cg.y, 1, cg.height)
-			cr:rectangle(cg.x+cg.width, cg.y, 1, cg.height)
-			cr:fill()
-		end
 
 		cr:set_source(gears.color(xresources.foreground))
+		cr:rectangle(cg.x-1, cg.y-1, cg.width+2, 1)
+		cr:rectangle(cg.x-1, cg.y+cg.height, cg.width+2, 1)
+		cr:rectangle(cg.x-1, cg.y, 1, cg.height)
+		cr:rectangle(cg.x+cg.width, cg.y, 1, cg.height)
+
 		cr:rectangle(cg.x+2, cg.y+cg.height+1, cg.width+2, 3)
 		cr:rectangle(cg.x+cg.width+1, cg.y+3, 3, cg.height)
 		cr:fill()
+
+		if client.focus == seenClient then
+			cr:set_source(gears.color(xresources.color6))
+			cr:rectangle(cg.x-2, cg.y-2, cg.width+4, 1)
+			cr:rectangle(cg.x-2, cg.y+cg.height+1, cg.width+4, 1)
+			cr:rectangle(cg.x-2, cg.y-1, 1, cg.height+2)
+			cr:rectangle(cg.x+cg.width+1, cg.y-1, 1, cg.height+2)
+			cr:fill()
+		end
 	end
 
 	easel.bgimage = shape
@@ -255,4 +257,8 @@ client.connect_signal("manage", function(c)
 	awful.placement.no_offscreen(c)
 	c:raise()
 	backdrop(c)
+end)
+
+client.connect_signal("unmanage", function(c)
+	updateBackdrop()
 end)
