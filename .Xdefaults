@@ -1,10 +1,10 @@
-*cursor: #515151
-*foreground: #515151
-*foreground_bold: #515151
-*background: #f2f0ec
-*background_bold: #f2f0ec
+*cursor: #f2f0ec
+*background: #515151
+*background_bold: #515151
+*foreground: #f2f0ec
+*foreground_bold: #f2f0ec
 
-*color0: #2d2d2d
+*color0: #f2f0ec
 *color1: #f2777a
 *color2: #33cc66
 *color3: #ffcc66
@@ -19,4 +19,4 @@
 *color12: #6699cc
 *color13: #cc99cc
 *color14: #66cccc
-*color15: #f2f0ec
+*color15: #515151
