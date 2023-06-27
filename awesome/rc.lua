@@ -16,9 +16,11 @@ local editor = os.getenv("EDITOR") or "nano"
 local xresources = beautiful.xresources.get_current_theme()
 beautiful.init {
 	gap = 8;
-	master_width_factor = 0.55;
-	border_width = 0;
+	master_width_factor = 0.5;
 }
+
+client.connect_signal("focus", function(c) c.border_color = "#ff1166" end)
+client.connect_signal("unfocus", function(c) c.border_color = "#d2c9a5" end)
 
 -- ERROR HANDLING
 if awesome.startup_errors then
@@ -67,7 +69,7 @@ awful.screen.connect_for_each_screen(function(s)
 	s.bar = awful.wibar {
 		position = "bottom";
 		screen = s;
-		bg = "#00000000";
+		bg = xresources.background;
 		height = 8;
 	}
 
@@ -79,12 +81,12 @@ awful.screen.connect_for_each_screen(function(s)
 				for i = 1, 5 do
 					local t = s.tags[i]
 					if not t.selected then
-						cairo:set_source(gears.color(xresources.foreground))
-						cairo:rectangle(px, 2, 40, 2)
+						cairo:set_source(gears.color("#d2c9a5"))
+						cairo:rectangle(px, 1, 40, 1)
 						cairo:fill()
 					else
-						cairo:set_source(gears.color(xresources.color1))
-						cairo:rectangle(px, 1, 40, 4)
+						cairo:set_source(gears.color("#ff1166"))
+						cairo:rectangle(px, 1, 40, 1)
 						cairo:fill()
 					end
 					px = px + 40
@@ -133,12 +135,22 @@ for i = 1, 5 do
 			if t then
 				t:view_only()
 			end
+		end, {}),
+		awful.key({"Mod4", "Shift"}, "#"..(i+9), function()
+			if client.focus then
+				local s = awful.screen.focused()
+				local t = s.tags[i]
+				if t then
+					client.focus:move_to_tag(t)
+				end
+			end
 		end, {})
 	)
 end
 
 local ckeys = awful.util.table.join(
 	awful.key({"Mod4"}, "q", function(c) c:kill() end, {}),
+	awful.key({"Mod4"}, "f", function(c) c.fullscreen = not c.fullscreen end, {}),
 	awful.key({"Mod4"}, "space", function(c) c:swap(awful.client.getmaster()) end, {})
 )
 
@@ -164,99 +176,21 @@ awful.rules.rules = {
 	{
 		rule = {};
 		properties = {
-			border_width = 0;
-			--focus = awful.client.focus.filter;
-			--raise = true;
+			border_width = 1;
+            border_color = "#d2c9a5";
 			maximized = false;
 			keys = ckeys;
 			buttons = buttons;
 			screen = awful.screen.focused;
 			placement = awful.placement.no_overlap + awful.placement.no_offscreen;
-			--titlebars_enabled = true;
 			size_hints_honor = false;
 		}
 	};
 }
-
--- one surface to draw everything
-local easel = wibox {
-	ontop = true;
-	bg = "#00000000";
-	visible = true;
-}
-
-local function updateBackdrop()
-	local geo = awful.screen.focused().geometry
-	easel.x = geo.x
-	easel.y = geo.y
-	easel.width = geo.width
-	easel.height = geo.height
-	local shape = cairo.ImageSurface.create(
-		cairo.Format.ARGB32,
-		easel.width, easel.height
-	)
-
-	local cr = cairo.Context(shape)
-	cr:set_source_rgba(0, 0, 0, 0)
-	cr:paint()
-
-	local activeScreen = awful.screen.focused()
-	for _, seenClient in pairs(activeScreen.clients) do
-		if not seenClient.fullscreen then
-			local cg = seenClient:geometry()
-
-			cr:set_source(gears.color("#191919"))
-			cr:rectangle(cg.x-1, cg.y-1, cg.width+2, 1)
-			cr:rectangle(cg.x-1, cg.y+cg.height, cg.width+2, 1)
-			cr:rectangle(cg.x-1, cg.y, 1, cg.height)
-			cr:rectangle(cg.x+cg.width, cg.y, 1, cg.height)
-
-			cr:rectangle(cg.x+2, cg.y+cg.height+1, cg.width+2, 3)
-			cr:rectangle(cg.x+cg.width+1, cg.y+3, 3, cg.height)
-			cr:fill()
-
-			if client.focus == seenClient then
-				cr:set_source(gears.color(xresources.color1))
-				cr:rectangle(cg.x-2, cg.y-2, cg.width+4, 2)
-				cr:rectangle(cg.x-2, cg.y+cg.height, cg.width+4, 2)
-				cr:rectangle(cg.x-2, cg.y, 2, cg.height+2)
-				cr:rectangle(cg.x+cg.width, cg.y, 2, cg.height+2)
-				cr:fill()
-			end
-		end
-	end
-
-	easel.bgimage = shape
-	easel.shape_bounding = shape._native
-end
-
-local function backdrop(c)
-	c:connect_signal("property::geometry", updateBackdrop)
-	c:connect_signal("property::shape_client_bounding", function()
-		gears.timer.delayed_call(updateBackdrop)
-	end)
-
-	updateBackdrop()
-end
-
-updateBackdrop()
-
-screen.connect_signal("tag::history::update", function()
-	updateBackdrop()
-end)
-
-client.connect_signal("focus", function(c)
-	updateBackdrop()
-end)
 
 -- SIGNALS
 client.connect_signal("manage", function(c)
 	awful.placement.no_overlap(c)
 	awful.placement.no_offscreen(c)
 	c:raise()
-	backdrop(c)
-end)
-
-client.connect_signal("unmanage", function(c)
-	updateBackdrop()
 end)
