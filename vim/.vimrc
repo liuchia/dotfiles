@@ -9,6 +9,6 @@ set noautoindent
 set nocindent
 set nosmartindent
 
-highlight TrailSpace ctermbg=red guibg=red
-match TrailSpace /\s\+$/
+set list
+set listchars=eol:·,tab:⍿·,trail:×
 
