@@ -5,12 +5,13 @@
 	border: none !important;
 	border-radius: 0 !important;
 	/* color around urlbar */
-	--toolbar-bgcolor: #ff1166 !important;
+	--toolbar-bgcolor: #f05 !important;
 }
 
 /* background of tab bar color */
-#tabbrowser-tabs {
-	background-color: #271727 !important;
+.browser-toolbar.titlebar-color {
+	background-color: #000 !important;
+	color: #FFF !important;
 }
 
 /* one bar */
@@ -31,8 +32,9 @@
 /* make tab width really small */
 .tabbrowser-tab {
 	-moz-box-flex: 0 !important;
-	width: 100px !important;
+	/*! width: 200px !important; */
 	min-width: 0 !important;
+	max-width: 100px !important;
 }
 
 /* no weird glowy box shadow on tab sound icon */
@@ -50,6 +52,11 @@
 	display: initial !important;
 }
 
+/* remove tab coloring */
+.tab-background {
+	background: none !important;
+}
+
 /* no tab separators */
 .tabbrowser-tab::after {
 	border: none !important;
@@ -61,29 +68,20 @@
 }
 
 /* selected tab color */
-.tabbrowser-tab[visuallyselected="true"] {
-  background-color: #ff1166 !important;
-	color: #271727 !important;
-}
-
-.tab-background {
-	background-image: none !important;;
-}
-
-:root {
-	--tab-block-margin: 0px !important;
+.tabbrowser-tab[selected="true"] {
+    background-color: #F05 !important;
 }
 
 /* slide nav bar under titlebar when not in focus */
 #navigator-toolbox:not(:focus-within):not(:hover) > #nav-bar { margin-top: -36px; }
 #navigator-toolbox:hover:not(:focus-within) > #nav-bar{ margin-top: -36px; }
 #navigator-toolbox > #nav-bar { transition: 0.2s margin-top ease-out; } 
-#nav-bar {
-	z-index: 1;
-	background-color: #271727 !important;
-	background-image: none !important;
+#nav-bar {z-index: 1;}
+
+#TabsToolbar {
+	z-index: 999;
 }
+
 #titlebar {
-	position: fixed;
 	z-index: 2;
 }

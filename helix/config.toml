@@ -1,0 +1,6 @@
+#theme = "cyberpunk"
+theme = "rose_pine_dawn"
+[editor.whitespace]
+render = "all"
+[editor.smart-tab]
+enable = false
